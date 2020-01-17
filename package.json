@@ -1,0 +1,52 @@
+{
+  "name": "collider2d",
+  "version": "0.1.0",
+  "description": "A 2D collision checker for modern games.",
+  "main": "index.js",
+  "module": "collider2d.js",
+  "scripts": {
+    "tsconfig": "tsc --init --declaration --allowSyntheticDefaultImports --target esnext --outDir lib",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "bundle": "rollup -c",
+    "bundle:watch": "rollup -c --watch",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robertcorponoi/collider2d"
+  },
+  "keywords": [
+    "2d",
+    "game",
+    "collision",
+    "collider",
+    "polygon",
+    "circle",
+    "esm",
+    "module",
+    "sat"
+  ],
+  "typings": "lib/index.d.ts",
+  "author": "Robert Corponoi",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-numeric-separator": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "chai": "^4.2.0",
+    "mocha": "^7.0.0",
+    "rollup": "^1.29.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "typescript": "^3.7.5"
+  }
+}
