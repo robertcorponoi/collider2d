@@ -191,7 +191,7 @@ describe("Point Collisions", () => {
 
     // Test collision = false - after offset changed.
     circle.offset = c2d.vector(-10, -10);
-    
+
     const collisionAfterOffsetChange = c2d.pointInCircle(c2d.vector(110, 110), circle);
     chai.expect(collisionAfterOffsetChange).to.be.false;
   });
@@ -227,5 +227,213 @@ describe("Point Collisions", () => {
     // Test collision = true
     const collision = c2d.pointInPolygon(v1, p1);
     chai.expect(collision).to.be.true;
+  });
+});
+
+describe('Collision - After moving from initial position', () => {
+  it("testCircleCircle - should not detect a collision after a circle is moved from collision range", () => {
+    const circle1 = c2d.circle(c2d.vector(0, 0), 20);
+    const circle2 = c2d.circle(c2d.vector(10, 0), 20);
+
+    // Test collision = true - without details.
+    const collided = c2d.testCircleCircle(circle1, circle2);
+    chai.expect(collided).to.be.true;
+
+    circle2.translate(40, 50);
+
+    // Test collision = false - moved from collision range.
+    const collidedAfterMove = c2d.testCircleCircle(circle1, circle2);
+    chai.expect(collidedAfterMove).to.be.false;
+  });
+
+  it("testCircleCircle - should detect a collision after a circle is moved to collision range", () => {
+    const circle1 = c2d.circle(c2d.vector(0, 0), 20);
+    const circle2 = c2d.circle(c2d.vector(10, 100), 20);
+
+    // Test collision = false.
+    const collided = c2d.testCircleCircle(circle1, circle2);
+    chai.expect(collided).to.be.false;
+
+    circle2.translate(-5, -90);
+
+    // Test collision = true - moved to collision range.
+    const collidedAfterMove = c2d.testCircleCircle(circle1, circle2);
+    chai.expect(collidedAfterMove).to.be.true;
+  });
+
+  it("testPolygonCircle - should not detect a collision after the polygon is moved - (x, y) greater", () => {
+    const circle = c2d.circle(c2d.vector(50, 50), 20);
+
+    const polygon = c2d.polygon(c2d.vector(10, 10), [
+      c2d.vector(0, 0),
+      c2d.vector(40, 0),
+      c2d.vector(40, 40),
+      c2d.vector(0, 40)
+    ]);
+
+    // Test collision = true - no details
+    const collided = c2d.testPolygonCircle(polygon, circle);
+    chai.expect(collided).to.be.true;
+
+    polygon.translate(200, 300);
+
+    // Test collision = false - after moving polygon to (200, 300);
+    const collidedAfterMoving = c2d.testPolygonCircle(polygon, circle);
+    chai.expect(collidedAfterMoving).to.be.false;
+  });
+
+  it("testPolygonCircle - should not detect a collision after the polygon is moved - (x, y) less", () => {
+    const circle = c2d.circle(c2d.vector(50, 50), 20);
+
+    const polygon = c2d.polygon(c2d.vector(10, 10), [
+      c2d.vector(0, 0),
+      c2d.vector(40, 0),
+      c2d.vector(40, 40),
+      c2d.vector(0, 40)
+    ]);
+
+    // Test collision = true - no details
+    const collided = c2d.testPolygonCircle(polygon, circle);
+    chai.expect(collided).to.be.true;
+
+    polygon.translate(-200, -150);
+
+    // Test collision = false - after moving polygon to (-200, -150);
+    const collidedAfterMoving = c2d.testPolygonCircle(polygon, circle);
+    chai.expect(collidedAfterMoving).to.be.false;
+  });
+
+  it("testPolygonCircle - should detect a collision after the polygon is moved - (x, y) greater", () => {
+    const circle = c2d.circle(c2d.vector(50, 50), 20);
+
+    const polygon = c2d.polygon(c2d.vector(-150, -125), [
+      c2d.vector(0, 0),
+      c2d.vector(40, 0),
+      c2d.vector(40, 40),
+      c2d.vector(0, 40)
+    ]);
+
+    // Test collision = false
+    const collided = c2d.testPolygonCircle(polygon, circle);
+    chai.expect(collided).to.be.false;
+
+    polygon.translate(180, 150);
+
+    // Test collision = true - after moving polygon to (30, 25);
+    const collidedAfterMoving = c2d.testPolygonCircle(polygon, circle);
+    chai.expect(collidedAfterMoving).to.be.true;
+  });
+
+  it("testPolygonCircle - should detect a collision after the polygon is moved - (x, y) less", () => {
+    const circle = c2d.circle(c2d.vector(50, 50), 20);
+
+    const polygon = c2d.polygon(c2d.vector(200, 300), [
+      c2d.vector(0, 0),
+      c2d.vector(40, 0),
+      c2d.vector(40, 40),
+      c2d.vector(0, 40)
+    ]);
+
+    // Test collision = false
+    const collided = c2d.testPolygonCircle(polygon, circle);
+    chai.expect(collided).to.be.false;
+
+    polygon.translate(-170, -275);
+
+    // Test collision = true - after moving polygon to (30, 25);
+    const collidedAfterMoving = c2d.testPolygonCircle(polygon, circle);
+    chai.expect(collidedAfterMoving).to.be.true;
+  });
+
+  it("testPolygonCircle - should not detect a collision after the circle is moved", () => {
+    const circle = c2d.circle(c2d.vector(50, 50), 20);
+
+    const polygon = c2d.polygon(c2d.vector(25, 25), [
+      c2d.vector(0, 0),
+      c2d.vector(40, 0),
+      c2d.vector(40, 40),
+      c2d.vector(0, 40)
+    ]);
+
+    // Test collision = false
+    const collided = c2d.testPolygonCircle(polygon, circle);
+    chai.expect(collided).to.be.true;
+
+    circle.translate(200, 300);
+
+    // Test collision = true - after moving polygon to (30, 25);
+    const collidedAfterMoving = c2d.testPolygonCircle(polygon, circle);
+    chai.expect(collidedAfterMoving).to.be.false;
+  });
+
+  it("testPolygonCircle - should detect a collision after the circle is moved", () => {
+    const circle = c2d.circle(c2d.vector(200, 150), 20);
+
+    const polygon = c2d.polygon(c2d.vector(0, 0), [
+      c2d.vector(0, 0),
+      c2d.vector(40, 0),
+      c2d.vector(40, 40),
+      c2d.vector(0, 40)
+    ]);
+
+    // Test collision = false
+    const collided = c2d.testPolygonCircle(polygon, circle);
+    chai.expect(collided).to.be.false;
+
+    circle.translate(-150, -100);
+
+    // Test collision = true - after moving circle to (50, 50).
+    const collidedAfterMoving = c2d.testPolygonCircle(polygon, circle);
+    chai.expect(collidedAfterMoving).to.be.true;
+  });
+
+  it("testPolygonPolygon - should not detect a collision after the polygon is moved - (x, y) greater", () => {
+    const polygon1 = c2d.polygon(c2d.vector(0, 0), [
+      c2d.vector(0, 0),
+      c2d.vector(40, 0),
+      c2d.vector(40, 40),
+      c2d.vector(0, 40)
+    ]);
+
+    const polygon2 = c2d.polygon(c2d.vector(30, 0), [
+      c2d.vector(0, 0),
+      c2d.vector(30, 0),
+      c2d.vector(0, 30)
+    ]);
+
+    // Test collision = true.
+    const collided = c2d.testPolygonPolygon(polygon1, polygon2);
+    chai.expect(collided).to.be.true;
+
+    // Test collision = false - after moving polygon.
+    polygon2.translate(90, 150);
+
+    const collidedAfterMoving = c2d.testPolygonPolygon(polygon1, polygon2);
+    chai.expect(collidedAfterMoving).to.be.false;
+  });
+
+  it("testPolygonPolygon - should not detect a collision after the polygon is moved - (x, y) less", () => {
+    const polygon1 = c2d.polygon(c2d.vector(0, 0), [
+      c2d.vector(0, 0),
+      c2d.vector(40, 0),
+      c2d.vector(40, 40),
+      c2d.vector(0, 40)
+    ]);
+
+    const polygon2 = c2d.polygon(c2d.vector(140, 150), [
+      c2d.vector(0, 0),
+      c2d.vector(30, 0),
+      c2d.vector(0, 30)
+    ]);
+
+    // Test collision = false
+    const collided = c2d.testPolygonPolygon(polygon1, polygon2);
+    chai.expect(collided).to.be.false;
+
+    // Test collision = true - after moving polygon.
+    polygon2.translate(-110, -150);
+
+    const collidedAfterMoving = c2d.testPolygonPolygon(polygon1, polygon2);
+    chai.expect(collidedAfterMoving).to.be.true;
   });
 });

@@ -478,7 +478,7 @@ function () {
      * just because of the inversion of the Y-axis when being displayed.
      * 
      * @param {Array<Vector>} points An array of vectors representing the points in the polygon, in counter-clockwise order.
-     * 
+     *    * 
      * @returns {Polygon} Returns this for chaining.
      */
     value: function setPoints(points) {
@@ -717,6 +717,28 @@ function () {
       return this._position;
     }
     /**
+     * **Note:** Not sure if this will be kept or not but for now it's disabled.
+     * 
+     * Sets a new position for this polygon and recalculates the points.
+     * 
+     * @param {Vector} position A Vector representing the new position of this polygon.
+     */
+    // set position(position: Vector) {
+    //   const diffX: number = -(this._position.x - position.x);
+    //   const diffY: number = -(this._position.y - position.y);
+    //   const diffPoint: Vector = new Vector(diffX, diffY);
+    //   const points: Array<Vector> = [];
+    //   this._points.map((point: Vector) => {
+    //     const tempX: number = point.x;
+    //     const tempY: number = point.y;
+    //     const tempPoint: Vector = new Vector(tempX, tempY);
+    //     const calculatedPoint: Vector = tempPoint.add(diffPoint);
+    //     points.push(calculatedPoint);
+    //   });
+    //   this.setPoints(points, true);
+    // }
+
+    /**
      * Returns the points of this polygon.
      * 
      * @returns {Array<Vector>}
@@ -922,8 +944,17 @@ function () {
 
 
   _createClass(Circle, [{
-    key: "getAABB",
+    key: "translate",
 
+    /**
+     * Translate the center of the cirlc.e
+     * 
+     * @param {Vector} position A Vector representing the new center of this circle.
+     */
+    value: function translate(x, y) {
+      this._position.x += x;
+      this._position.y += y;
+    }
     /**
      * Compute the axis-aligned bounding box (AABB) of this Circle.
      * 
@@ -931,6 +962,9 @@ function () {
      * 
      * @returns {Polygon} Returns the AABB of this circle.
      */
+
+  }, {
+    key: "getAABB",
     value: function getAABB() {
       var corner = this._position.clone().add(this._offset).sub(new Vector(this._radius, this._radius));
 

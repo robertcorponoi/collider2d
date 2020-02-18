@@ -78,6 +78,16 @@ export default class Circle {
   set offset(offset: Vector) { this._offset = offset; }
 
   /**
+   * Translate the center of the cirlc.e
+   * 
+   * @param {Vector} position A Vector representing the new center of this circle.
+   */
+  translate(x: number, y: number) {
+    this._position.x += x;
+    this._position.y += y;
+  }
+
+  /**
    * Compute the axis-aligned bounding box (AABB) of this Circle.
    * 
    * Note: Returns a new `Polygon` each time this is called.
