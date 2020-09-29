@@ -1,7 +1,6 @@
 'use strict'
 
-import Box from './Box';
-import Vector from './Vector';
+import Vector from './vector';
 
 /**
  * Represents a *convex* polygon with any number of points (specified in counter-clockwise order).
@@ -84,7 +83,6 @@ export default class Polygon {
    */
   constructor(position: Vector = new Vector(), points: Array<Vector> = []) {
     this._position = position;
-
     this.setPoints(points);
   }
 
@@ -371,7 +369,10 @@ export default class Polygon {
 
     }
 
-    return new Box(this._position.clone().add(new Vector(xMin, yMin)), xMax - xMin, yMax - yMin).toPolygon();
+    return new Polygon(this._position.clone().add(new Vector(xMin, yMin)), [
+      new Vector(), new Vector(xMax - xMin, 0),
+      new Vector(xMax - xMin, yMax - yMin), new Vector(0, yMax - yMin)
+    ]);
   }
 
   /**

@@ -1,3 +1,14 @@
+## 1.0.0 / 2020-09-28
+- [FEATURE] Made the Vector, Box, Circle, and Polygon classes into their own individual exports instead of having to be created through the Collider2d class.
+- [FEATURE] Removed the reference to Box in Polygon to clear up a circular dependency.
+- [DOCS] Updated documentation to reflect new API.
+- [TEST] Updated tests to match new API.
+- [MISC] Removed unnecessary types.
+- [MISC] Started renaming filse to use underscores to follow JavaScript guidelines.
+- [MISC] Updated dev-dependencies to their latest versions and fixed all security vulnerabilities.
+- [MISC] Updated npm scripts to remove existing files before building/bundling to avoid issues with old code.
+- [MISC] Renamed lib directory to build to be consistent with other projects.
+
 ## 0.2.1 / 2020-04-16
 - [MISC] Updated out-of-date dependencies to their latest versions which also fixed all possible fixed security vulnerabilities.
 

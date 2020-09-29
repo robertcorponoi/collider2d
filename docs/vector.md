@@ -10,7 +10,7 @@ A vector is a point in 2D space that has a x and y position.
 **example:**
 
 ```js
-const vec1 = c2d.vector(10, 25);
+const vec1 = new Vector(10, 25);
 ```
 
 ## **Getters**
@@ -36,9 +36,9 @@ Copies another vector's values into this vector.
 **example:**
 
 ```js
-const vec1 = c2d.vector(10, 10);
+const vec1 = new Vector(10, 10);
 
-const vec2 = c2d.vector(15, 20);
+const vec2 = new Vector(15, 20);
 
 vec1.copy(vec2); // vec1 is now at (10, 10)
 ```
@@ -50,7 +50,7 @@ Returns a new vector with the same coordinates as this one.
 **example:**
 
 ```js
-const vec1 = c2d.vector(10, 10);
+const vec1 = new Vector(10, 10);
 
 const vec2 = vec1.clone(); // vec2 is at (10, 10)
 ```
@@ -62,7 +62,7 @@ Change this vector to be perpendicular to what is was before. This effectively r
 **example:**
 
 ```js
-const vec1 = c2d.vector(5, 10);
+const vec1 = new Vector(5, 10);
 
 vec1.perp(); // vec1 is now (10, -5)
 ```
@@ -78,7 +78,7 @@ Rotate this vector counter-clockwise by the specified angle (in radians).
 **example:**
 
 ```js
-const vec1 = c2d.vector(5, 10);
+const vec1 = new Vector(5, 10);
 
 vec1.rotate(45);
 ```
@@ -90,7 +90,7 @@ Reverse the vector.
 **example:**
 
 ```js
-const vec1 = c2d.vector(5, 10);
+const vec1 = new Vector(5, 10);
 
 vec1.reverse(); // vec1 is now (-5, -10)
 ```
@@ -102,7 +102,7 @@ Make this vecotr have a length of 1.
 **example:**
 
 ```js
-const vec1 = c2d.vector(5, 10);
+const vec1 = new Vector(5, 10);
 
 vec1.normalize();
 ```
@@ -118,8 +118,8 @@ Add another vector to this one.
 **example:**
 
 ```js
-const vec1 = c2d.vector(5, 10);
-const vec2 = c2d.vector(10, 20);
+const vec1 = new Vector(5, 10);
+const vec2 = new Vector(10, 20);
 
 vec1.add(vec2); // vec1 is now (15, 30)
 ```
@@ -135,8 +135,8 @@ Subtract another vector from this one.
 **example:**
 
 ```js
-const vec1 = c2d.vector(15, 35);
-const vec2 = c2d.vector(10, 20);
+const vec1 = new Vector(15, 35);
+const vec2 = new Vector(10, 20);
 
 vec1.sub(vec2); // vec1 is now (5, 15)
 ```
@@ -155,7 +155,7 @@ An independent scaling factor can be provided for each axis, or a single scaling
 **example:**
 
 ```js
-const vec1 = c2d.vector(15, 35);
+const vec1 = new Vector(15, 35);
 
 vec1.scale(2, 5); // vec1 is now (30, 175)
 ```
@@ -171,8 +171,8 @@ Project this vector onto another vector.
 **example:**
 
 ```js
-const vec1 = c2d.vector(5, 5);
-const vec2 = c2d.vector(2, 5);
+const vec1 = new Vector(5, 5);
+const vec2 = new Vector(2, 5);
 
 vec1.project(vec2);
 ```
@@ -190,8 +190,8 @@ This is slightly more efficient than `project` when dealing with unit vectors.
 **example:**
 
 ```js
-const vec1 = c2d.vector(5, 5);
-const vec2 = c2d.vector(2, 5);
+const vec1 = new Vector(5, 5);
+const vec2 = new Vector(2, 5);
 
 vec1.projectN(vec2);
 ```
@@ -207,9 +207,9 @@ Reflect this Vector on an arbitrary axis.
 **example:**
 
 ```js
-const vec1 = c2d.vector(5, 5);
+const vec1 = new Vector(5, 5);
 
-const axis = c2d.vector(0, 1);
+const axis = new Vector(0, 1);
 
 vec1.reflect(axis);
 ```
@@ -227,9 +227,9 @@ This is slightly more efficient than `reflect` when dealing with an axis that is
 **example:**
 
 ```js
-const vec1 = c2d.vector(5, 5);
+const vec1 = new Vector(5, 5);
 
-const axis = c2d.vector(0, 1);
+const axis = new Vector(0, 1);
 
 vec1.reflectN(axis);
 ```
@@ -245,8 +245,8 @@ Get the dot product of this vector and another.
 **example:**
 
 ```js
-const vec1 = c2d.vector(5, 5);
-const vec2 = c2d.vector(10, 25);
+const vec1 = new Vector(5, 5);
+const vec2 = new Vector(10, 25);
 
 vec1.dot(vec2); // 175
 ```
@@ -258,7 +258,7 @@ Get the squared length of this Vector.
 **example:**
 
 ```js
-const vec1 = c2d.vector(3, 4);
+const vec1 = new Vector(3, 4);
 
 vec1.len2(); // 25
 ```
@@ -270,7 +270,7 @@ Get the length of this vector.
 **example:**
 
 ```js
-const vec1 = c2d.vector(3, 4);
+const vec1 = new Vector(3, 4);
 
 vec1.len(); // 5
 ```

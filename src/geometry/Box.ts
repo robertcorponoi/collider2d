@@ -1,7 +1,7 @@
 'use strict'
 
-import Vector from './Vector';
-import Polygon from './Polygon';
+import Vector from './vector';
+import Polygon from './polygon';
 
 /**
  * A box represents an axis-aligned box with a width and height.
@@ -45,9 +45,7 @@ export default class Box {
    */
   constructor(position: Vector = new Vector(), width: number = 0, height: number = 0) {
     this._position = position;
-
     this._width = width;
-
     this._height = height;
   }
 

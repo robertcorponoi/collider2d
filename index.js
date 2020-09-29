@@ -1,5 +1,7 @@
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -37,9 +39,7 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-var Vector =
-/*#__PURE__*/
-function () {
+var Vector = /*#__PURE__*/function () {
   /**
    * The x coordinate of this vector.
    * 
@@ -373,9 +373,7 @@ function () {
  * The `pos` property can be changed directly.
  */
 
-var Polygon =
-/*#__PURE__*/
-function () {
+var Polygon = /*#__PURE__*/function () {
   /**
    * A vector representing the origin of this polygon (all other points are relative to this one).
    * 
@@ -674,7 +672,7 @@ function () {
         if (point["y"] < yMin) yMin = point["y"];else if (point["y"] > yMax) yMax = point["y"];
       }
 
-      return new Box(this._position.clone().add(new Vector(xMin, yMin)), xMax - xMin, yMax - yMin).toPolygon();
+      return new Polygon(this._position.clone().add(new Vector(xMin, yMin)), [new Vector(), new Vector(xMax - xMin, 0), new Vector(xMax - xMin, yMax - yMin), new Vector(0, yMax - yMin)]);
     }
     /**
      * Compute the centroid (geometric center) of the Polygon.
@@ -815,9 +813,7 @@ function () {
  * A box represents an axis-aligned box with a width and height.
  */
 
-var Box =
-/*#__PURE__*/
-function () {
+var Box = /*#__PURE__*/function () {
   /**
    * The position of this box as a Vector.
    * 
@@ -892,9 +888,7 @@ function () {
  * 
  * If no radius is provided the circle will have a radius of `0`.
  */
-var Circle =
-/*#__PURE__*/
-function () {
+var Circle = /*#__PURE__*/function () {
   /**
    * A Vector representing the center point of this circle.
    * 
@@ -1033,9 +1027,7 @@ function () {
  * - The vector representing the minimum change necessary to extract the first object from the second one (as well as a unit vector in that direction and the magnitude of the overlap)
  * - Whether the first object is entirely inside the second, and vice versa.
  */
-var CollisionDetails =
-/*#__PURE__*/
-function () {
+var CollisionDetails = /*#__PURE__*/function () {
   /**
    * The first collision object.
    * 
@@ -1118,9 +1110,7 @@ function () {
   return CollisionDetails;
 }();
 
-var Collider2D =
-/*#__PURE__*/
-function () {
+var Collider2D = /*#__PURE__*/function () {
   /**
    * A pool of `Vector objects that are used in calculations to avoid allocating memory.
    * 
@@ -1204,73 +1194,16 @@ function () {
     }
   }
   /**
-   * Creates a new vector.
+   * Check if a point is inside a circle.
    * 
-   * @param {number} x The x position of the vector.
-   * @param {number} y The y position of the vector.
+   * @param {Vector} point The point to test.
+   * @param {Circle} circle The circle to test.
    * 
-   * @returns {Vector} Returns the newly created vector.
+   * @returns {boolean} Returns true if the point is inside the circle or false otherwise.
    */
 
 
   _createClass(Collider2D, [{
-    key: "vector",
-    value: function vector(x, y) {
-      return new Vector(x, y);
-    }
-    /**
-     * Creates a new circle.
-     * 
-     * @param {Vector} position A vector specifying the center position of the circle.
-     * @param {number} radius The radius of the circle.
-     * 
-     * @returns {Circle} Returns the newly created circle.
-     */
-
-  }, {
-    key: "circle",
-    value: function circle(position, radius) {
-      return new Circle(position, radius);
-    }
-    /**
-     * Creates a new polygon.
-     * 
-     * @param {Vector} position A vector representing the origin point of the polygon.
-     * @param {Array<Vector>} points An array of vectors that specifies the points of the polygon, in counter-clockwise order.
-     * 
-     * @returns {Polygon} Returns the newly created plygon.
-     */
-
-  }, {
-    key: "polygon",
-    value: function polygon(position, points) {
-      return new Polygon(position, points);
-    }
-    /**
-     * Creates a new box.
-     * 
-     * @param {Vector} position A vector representing the position of the box.
-     * @param {number} width The width of the box.
-     * @param {number} height The height of the box.
-     * 
-     * @returns {Box} Returns the newly created box.
-     */
-
-  }, {
-    key: "box",
-    value: function box(position, width, height) {
-      return new Box(position, width, height);
-    }
-    /**
-     * Check if a point is inside a circle.
-     * 
-     * @param {Vector} point The point to test.
-     * @param {Circle} circle The circle to test.
-     * 
-     * @returns {boolean} Returns true if the point is inside the circle or false otherwise.
-     */
-
-  }, {
     key: "pointInCircle",
     value: function pointInCircle(point, circle) {
       var differenceV = this._T_VECTORS.pop().copy(point).sub(circle.position).sub(circle.offset);
@@ -1747,4 +1680,8 @@ function () {
   return Collider2D;
 }();
 
-module.exports = Collider2D;
+exports.Box = Box;
+exports.Circle = Circle;
+exports.Collider2d = Collider2D;
+exports.Polygon = Polygon;
+exports.Vector = Vector;

@@ -1,4 +1,4 @@
-import Vector from './Vector';
+import Vector from './vector';
 /**
  * Represents a *convex* polygon with any number of points (specified in counter-clockwise order).
  *

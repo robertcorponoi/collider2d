@@ -51,10 +51,10 @@ If you're using collider2d in a browser environment, you can use the `collider2d
 
 ```js
 // Non-webpack environment:
-import Collider2D from '../node_modules/collider2d/collider2d.js';
+import { Vector, Box, Circle, Polygon, Collider2d } from '../node_modules/collider2d/collider2d.js';
 
 // Webpack/other bundler environment:
-import Collider2D from 'collider2d';
+import { Vector, Box, Circle, Polygon, Collider2d } from 'collider2d';
 ```
 
 and in a Node environment, you can imply require the module:
@@ -62,13 +62,19 @@ and in a Node environment, you can imply require the module:
 **node**
 
 ```js
-const Collider2D = require('collider2d');
+const { Vector, Box, Circle, Polygon, Collider2d } = require('collider2d');
 ```
 
-lastly you just have to make a new instance of Collider2D like so:
+The `Vector`, `Box`, `Circle`, and `Polygon` classes are used to create the shapes to test and then the `Collider2d` class is used to test collisions using the created shapes. Just like with the geometry classes, you'll need to create a new instance of the class to use the collision tests. In the examples below you'll see:
 
 ```js
-const c2d = new Collider2D();
+const collision = collider2d.testPolygonPolygon();
+```
+
+This implies that an instance of the `Collider2d` is created beforehand like so:
+
+```js
+const collider2d = new Collider2d();
 ```
 
 ## **Geometry**
@@ -87,7 +93,7 @@ A vector is a point in 2D space that has a x and y position.
 **example:**
 
 ```js
-const vec1 = c2d.vector(10, 25);
+const vec1 = new Vector(10, 25);
 ```
 
 To see the full list of properties and methods for circles, check out the [vector documentation](docs/vector.md).
@@ -104,7 +110,7 @@ A circle consists of a center position and a radius.
 **example:**
 
 ```js
-const circle = c2d.circle(c2d.vector(5, 5), 10);
+const circle = new Circle(new Vector(5, 5), 10);
 ```
 
 To see the full list of properties and methods for circles, check out the [circles documentation](docs/circle.md).
@@ -121,11 +127,11 @@ A polygon consists of a convex shape with any number of points (specified in a c
 **example:**
 
 ```js
-const polygon = c2d.polygon(c2d.vector(0, 0), [
-  c2d.vector(0, 0),
-  c2d.vector(40, 0),
-  c2d.vector(40, 40),
-  c2d.vector(0, 40)
+const polygon = new Polygon(new Vector(0, 0), [
+  new Vector(0, 0),
+  new Vector(40, 0),
+  new Vector(40, 40),
+  new Vector(0, 40)
 ]);
 ```
 
@@ -144,7 +150,7 @@ A box represents an axis-aligned bounding box with a width and a height.
 **example:**
 
 ```js
-const box = c2d.box(c2d.vector(5, 10), 100, 250);
+const box = new Box(new Vector(5, 10), 100, 250);
 ```
 
 To see the full list of properties and methods for boxes, check out the [box documentation](docs/box.md).
@@ -185,9 +191,9 @@ Returns true if the point is in the circle or false otherwise.
 **example:**
 
 ```js
-const circle = c2d.circle(c2d.vector(100, 100), 20);
+const circle = new Circle(new Vector(100, 100), 20);
 
-const collision = c2d.pointInCircle(c2d.vector(110, 110), circle); // true
+const collision = collider2d.pointInCircle(new Vector(110, 110), circle); // true
 ```
 
 ### **pointInPolygon**
@@ -204,13 +210,13 @@ Returns true if the point is in the polygon or false otherwise.
 **example:**
 
 ```js
-const triangle = c2d.polygon(c2d.vector(30, 0), [
-  c2d.vector(0, 0),
-  c2d.vector(30, 0),
-  c2d.vector(0, 30)
+const triangle = new Polygon(new Vector(30, 0), [
+  new Vector(0, 0),
+  new Vector(30, 0),
+  new Vector(0, 30)
 ]);
 
-const collision = c2d.pointInPolygon(c2d.vector(35, 5), triangle); // true
+const collision = collider2d.pointInPolygon(new Vector(35, 5), triangle); // true
 ```
 
 ## **Polygon Collisions**
@@ -230,24 +236,24 @@ Returns true if the circles collide or false otherwise. If details is set to tru
 **example:**
 
 ```js
-const polygon1 = c2d.polygon(c2d.vector(0, 0), [
-  c2d.vector(0, 0),
-  c2d.vector(40, 0),
-  c2d.vector(40, 40),
-  c2d.vector(0, 40)
+const polygon1 = new Polygon(new Vector(0, 0), [
+  new Vector(0, 0),
+  new Vector(40, 0),
+  new Vector(40, 40),
+  new Vector(0, 40)
 ]);
 
-const polygon2 = c2d.polygon(c2d.vector(30, 0), [
-  c2d.vector(0, 0),
-  c2d.vector(30, 0),
-  c2d.vector(0, 30)
+const polygon2 = new Polygon(new Vector(30, 0), [
+  new Vector(0, 0),
+  new Vector(30, 0),
+  new Vector(0, 30)
 ]);
 
 // No details
-const collided = c2d.testPolygonPolygon(polygon1, polygon2); // true
+const collided = collider2d.testPolygonPolygon(polygon1, polygon2); // true
 
 // Details
-const collidedDetails = c2d.testPolygonPolygon(polygon1, polygon2, true);
+const collidedDetails = collider2d.testPolygonPolygon(polygon1, polygon2, true);
 console.log(collidedDetails.overlap); // 10
 ```
 
@@ -266,20 +272,20 @@ Returns true if the circles collide or false otherwise. If details is set to tru
 **example:**
 
 ```js
-const circle = c2d.circle(c2d.vector(50, 50), 20);
+const circle = new Circle(new Vector(50, 50), 20);
 
-const polygon = c2d.polygon(c2d.vector(0, 0), [
-  c2d.vector(0, 0),
-  c2d.vector(40, 0),
-  c2d.vector(40, 40),
-  c2d.vector(0, 40)
+const polygon = new Polygon(new Vector(0, 0), [
+  new Vector(0, 0),
+  new Vector(40, 0),
+  new Vector(40, 40),
+  new Vector(0, 40)
 ]);
 
 // No details
-const collided = c2d.testPolygonCircle(polygon, circle); // true
+const collided = collider2d.testPolygonCircle(polygon, circle); // true
 
 // Details
-const collidedDetails = c2d.testPolygonCircle(polygon, circle, true);
+const collidedDetails = collider2d.testPolygonCircle(polygon, circle, true);
 console.log(collidedDetails.overlap.toFixed(2)); // 5.86
 ```
 
@@ -300,14 +306,14 @@ Returns true if the circles collide or false otherwise. If details is set to tru
 **example:**
 
 ```js
-const circle1 = c2d.circle(c2d.vector(0, 0), 20);
-const circle2 = c2d.circle(c2d.vector(30, 0), 20);
+const circle1 = new Circle(new Vector(0, 0), 20);
+const circle2 = new Circle(new Vector(30, 0), 20);
 
 // No details
-const collided = c2d.testCircleCircle(circle1, circle2); // true
+const collided = collider2d.testCircleCircle(circle1, circle2); // true
 
 // Details
-const collidedDetails = c2d.testCircleCircle(circle1, circle2, true);
+const collidedDetails = collider2d.testCircleCircle(circle1, circle2, true);
 console.log(collidedDetails.overlap); // 10
 ```
 
@@ -328,20 +334,20 @@ Returns true if the circles collide or false otherwise. If details is set to tru
 **example:**
 
 ```js
-const circle = c2d.circle(c2d.vector(50, 50), 20);
+const circle = new Circle(new Vector(50, 50), 20);
 
-const polygon = c2d.polygon(c2d.vector(0, 0), [
-  c2d.vector(0, 0),
-  c2d.vector(40, 0),
-  c2d.vector(40, 40),
-  c2d.vector(0, 40)
+const polygon = new Polygon(new Vector(0, 0), [
+  new Vector(0, 0),
+  new Vector(40, 0),
+  new Vector(40, 40),
+  new Vector(0, 40)
 ]);
 
 // No details
-const collided = c2d.testCirclePolygon(circle, polygon); // true
+const collided = collider2d.testCirclePolygon(circle, polygon); // true
 
 // Details
-const collidedDetails = c2d.testCirclePolygon(circle, polygon, true);
+const collidedDetails = collider2d.testCirclePolygon(circle, polygon, true);
 ```
 
 ## **Tests**

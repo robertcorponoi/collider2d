@@ -1,8 +1,8 @@
 'use strict'
 
-import Box from './Box';
-import Vector from './Vector';
-import Polygon from './Polygon';
+import Box from './box';
+import Vector from './vector';
+import Polygon from './polygon';
 
 /**
  * Represents a circle with a position and a radius.
@@ -96,7 +96,6 @@ export default class Circle {
    */
   getAABB(): Polygon {
     const corner = this._position.clone().add(this._offset).sub(new Vector(this._radius, this._radius));
-
     return new Box(corner, this._radius * 2, this._radius * 2).toPolygon();
   }
 
@@ -109,7 +108,6 @@ export default class Circle {
    */
   setOffset(offset: Vector): Circle {
     this._offset = offset;
-
     return this;
   }
 }

@@ -1,5 +1,5 @@
-import Vector from './Vector';
-import Polygon from './Polygon';
+import Vector from './vector';
+import Polygon from './polygon';
 /**
  * Represents a circle with a position and a radius.
  *

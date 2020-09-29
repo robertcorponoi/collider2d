@@ -1,5 +1,5 @@
-import Vector from './Vector';
-import Polygon from './Polygon';
+import Vector from './vector';
+import Polygon from './polygon';
 /**
  * A box represents an axis-aligned box with a width and height.
  */

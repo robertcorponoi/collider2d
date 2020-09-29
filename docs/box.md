@@ -17,7 +17,7 @@ Returns a polygon whose edges are the same as this box.
 **example:**
 
 ```js
-const box = c2d.box(c2d.vector(5, 10), 100, 250);
+const box = new Box(new Vector(5, 10), 100, 250);
 
 box.toPolygon();
 ```

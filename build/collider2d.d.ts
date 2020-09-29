@@ -1,8 +1,7 @@
-import Box from './geometry/Box';
-import Vector from './geometry/Vector';
-import Circle from './geometry/Circle';
-import Polygon from './geometry/Polygon';
-import CollisionDetails from './details/CollisionDetails';
+import Vector from './geometry/vector';
+import Circle from './geometry/circle';
+import Polygon from './geometry/polygon';
+import CollisionDetails from './collision_details';
 export default class Collider2D {
     /**
      * A pool of `Vector objects that are used in calculations to avoid allocating memory.
@@ -61,43 +60,6 @@ export default class Collider2D {
      */
     private _RIGHT_VORONOI_REGION;
     constructor();
-    /**
-     * Creates a new vector.
-     *
-     * @param {number} x The x position of the vector.
-     * @param {number} y The y position of the vector.
-     *
-     * @returns {Vector} Returns the newly created vector.
-     */
-    vector(x: number, y: number): Vector;
-    /**
-     * Creates a new circle.
-     *
-     * @param {Vector} position A vector specifying the center position of the circle.
-     * @param {number} radius The radius of the circle.
-     *
-     * @returns {Circle} Returns the newly created circle.
-     */
-    circle(position: Vector, radius: number): Circle;
-    /**
-     * Creates a new polygon.
-     *
-     * @param {Vector} position A vector representing the origin point of the polygon.
-     * @param {Array<Vector>} points An array of vectors that specifies the points of the polygon, in counter-clockwise order.
-     *
-     * @returns {Polygon} Returns the newly created plygon.
-     */
-    polygon(position: Vector, points: Array<Vector>): Polygon;
-    /**
-     * Creates a new box.
-     *
-     * @param {Vector} position A vector representing the position of the box.
-     * @param {number} width The width of the box.
-     * @param {number} height The height of the box.
-     *
-     * @returns {Box} Returns the newly created box.
-     */
-    box(position: Vector, width: number, height: number): Box;
     /**
      * Check if a point is inside a circle.
      *

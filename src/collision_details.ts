@@ -1,8 +1,8 @@
 'use strict'
 
-import Vector from '../geometry/Vector';
-import Circle from '../geometry/Circle';
-import Polygon from '../geometry/Polygon';
+import Vector from './geometry/vector';
+import Circle from './geometry/circle';
+import Polygon from './geometry/polygon';
 
 /**
  * An object representing the result of an intersection containing:

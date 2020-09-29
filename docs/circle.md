@@ -10,7 +10,7 @@ A circle consists of a center position and a radius.
 **example:**
 
 ```js
-const circle = c2d.circle(c2d.vector(5, 5), 10);
+const circle = new Circle(new Vector(5, 5), 10);
 ```
 
 ## **Getters**
@@ -41,9 +41,9 @@ Sets a new offset for the circle.
 **example:**
 
 ```js
-const circle = c2d.circle(c2d.vector(2, 5), 10);
+const circle = new Circle(new Vector(2, 5), 10);
 
-circle.offset = c2d.vector(3, 3);
+circle.offset = new Vector(3, 3);
 ```
 
 ## **Methods**
@@ -55,7 +55,7 @@ Compute the axis-aligned bounding box (AABB) of this Circle.
 Note: Returns a new `Polygon` each time this is called.
 
 ```js
-const circle = c2d.circle(c2d.vector(2, 5), 10);
+const circle = new Circle(new Vector(2, 5), 10);
 
 const boundingBox = circle.getAABB();
 ```

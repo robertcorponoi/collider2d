@@ -10,11 +10,11 @@ A polygon consists of a convex shape with any number of points (specified in a c
 **example:**
 
 ```js
-const polygon = c2d.polygon(c2d.vector(0, 0), [
-  c2d.vector(0, 0),
-  c2d.vector(40, 0),
-  c2d.vector(40, 40),
-  c2d.vector(0, 40)
+const polygon = new Polygon(new Vector(0, 0), [
+  new Vector(0, 0),
+  new Vector(40, 0),
+  new Vector(40, 40),
+  new Vector(0, 40)
 ]);
 ```
 
@@ -65,18 +65,18 @@ This is called automatically when a polygon is initialized.
 **example:**
 
 ```js
-const polygon = c2d.polygon(c2d.vector(0, 0), [
-  c2d.vector(0, 0),
-  c2d.vector(40, 0),
-  c2d.vector(40, 40),
-  c2d.vector(0, 40)
+const polygon = new Polygon(new Vector(0, 0), [
+  new Vector(0, 0),
+  new Vector(40, 0),
+  new Vector(40, 40),
+  new Vector(0, 40)
 ]);
 
 polygon.setPoints([
-  c2d.vector(0, 0),
-  c2d.vector(80, 0),
-  c2d.vector(80, 80),
-  c2d.vector(0, 80)
+  new Vector(0, 0),
+  new Vector(80, 0),
+  new Vector(80, 80),
+  new Vector(0, 80)
 );
 ```
 
@@ -91,11 +91,11 @@ Sets the current rotation angle of the polygon.
 **example:**
 
 ```js
-const polygon = c2d.polygon(c2d.vector(0, 0), [
-  c2d.vector(0, 0),
-  c2d.vector(40, 0),
-  c2d.vector(40, 40),
-  c2d.vector(0, 40)
+const polygon = new Polygon(new Vector(0, 0), [
+  new Vector(0, 0),
+  new Vector(40, 0),
+  new Vector(40, 40),
+  new Vector(0, 40)
 ]);
 
 polygon.setAngle(45);
@@ -112,14 +112,14 @@ et the current offset to apply to the `points` before applying the `angle` rotat
 **example:**
 
 ```js
-const polygon = c2d.polygon(c2d.vector(0, 0), [
-  c2d.vector(0, 0),
-  c2d.vector(40, 0),
-  c2d.vector(40, 40),
-  c2d.vector(0, 40)
+const polygon = new Polygon(new Vector(0, 0), [
+  new Vector(0, 0),
+  new Vector(40, 0),
+  new Vector(40, 40),
+  new Vector(0, 40)
 ]);
 
-polygon.setOffset(c2d.vector(2, 5));
+polygon.setOffset(new Vector(2, 5));
 ```
 
 ### **rotate**
@@ -135,11 +135,11 @@ Note: This changes the **original** points (so any `angle` will be applied on to
 **example:**
 
 ```js
-const polygon = c2d.polygon(c2d.vector(0, 0), [
-  c2d.vector(0, 0),
-  c2d.vector(40, 0),
-  c2d.vector(40, 40),
-  c2d.vector(0, 40)
+const polygon = new Polygon(new Vector(0, 0), [
+  new Vector(0, 0),
+  new Vector(40, 0),
+  new Vector(40, 40),
+  new Vector(0, 40)
 ]);
 
 polygon.rotate(45);
@@ -159,11 +159,11 @@ Note: This changes the **original** points (so any `offset` will be applied on t
 **example:**
 
 ```js
-const polygon = c2d.polygon(c2d.vector(0, 0), [
-  c2d.vector(0, 0),
-  c2d.vector(40, 0),
-  c2d.vector(40, 40),
-  c2d.vector(0, 40)
+const polygon = new Polygon(new Vector(0, 0), [
+  new Vector(0, 0),
+  new Vector(40, 0),
+  new Vector(40, 40),
+  new Vector(0, 40)
 ]);
 
 polygon.translate(5, 10);
@@ -180,11 +180,11 @@ Note: Returns a _new_ `Polygon` each time you call this.
 **example:**
 
 ```js
-const polygon = c2d.polygon(c2d.vector(0, 0), [
-  c2d.vector(0, 0),
-  c2d.vector(40, 0),
-  c2d.vector(40, 40),
-  c2d.vector(0, 40)
+const polygon = new Polygon(new Vector(0, 0), [
+  new Vector(0, 0),
+  new Vector(40, 0),
+  new Vector(40, 40),
+  new Vector(0, 40)
 ]);
 
 const polygonBoundingBox = polygon.getAABB();
@@ -203,11 +203,11 @@ Note: Returns a _new_ `Vector` each time you call this.
 **example:**
 
 ```js
-const polygon = c2d.polygon(c2d.vector(0, 0), [
-  c2d.vector(0, 0),
-  c2d.vector(40, 0),
-  c2d.vector(40, 40),
-  c2d.vector(0, 40)
+const polygon = new Polygon(new Vector(0, 0), [
+  new Vector(0, 0),
+  new Vector(40, 0),
+  new Vector(40, 40),
+  new Vector(0, 40)
 ]);
 
 const centroid = polygon.getCentroid();
