@@ -16,9 +16,6 @@ export default {
     babel({ extensions, include: ['src/**/*'] }),
   ],
   output: [{
-    file: pkg.main,
-    format: 'cjs',
-  }, {
     file: pkg.module,
     format: 'esm',
   }],
