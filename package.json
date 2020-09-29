@@ -2,7 +2,7 @@
   "name": "collider2d",
   "version": "1.0.0",
   "description": "A 2D collision checker for modern JavaScript games.",
-  "main": "index.js",
+  "main": "build/index.js",
   "module": "collider2d.js",
   "scripts": {
     "rm:build": "rm -rf build",
@@ -15,8 +15,7 @@
     "build:js": "babel src --out-dir build --extensions \".ts,.tsx\" --source-maps inline",
     "bundle": "npm run rm:bundle && rollup -c",
     "bundle:watch": "rollup -c --watch",
-    "test": "mocha",
-    "prepare": "npm run build && npm run bundle"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -33,7 +32,7 @@
     "module",
     "sat"
   ],
-  "typings": "lib/index.d.ts",
+  "typings": "build/index.d.ts",
   "author": "Robert Corponoi",
   "license": "MIT",
   "devDependencies": {
