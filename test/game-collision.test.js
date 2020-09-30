@@ -1,7 +1,7 @@
 'use strict'
 
 const chai = require('chai');
-const { Vector, Box, Circle, Polygon, Collider2d } = require('../index');
+const { Vector, Box, Circle, Polygon, Collider2d } = require('../build/index.js');
 
 const collider2d = new Collider2d();
 
@@ -24,33 +24,48 @@ describe('Vector Scaling', () => {
 });
 
 describe("Polygon Centroids", () => {
-  it("should calculate the correct value for a square", () => {
-    const polygon = new Polygon(
-      new Vector(0, 0), [
-      new Vector(0, 0),
-      new Vector(40, 0),
-      new Vector(40, 40),
-      new Vector(0, 40)
-    ]);
+  describe("Generic Points", () => {
+    it("should return the generic points of the Polygon", () => {
+      const polygon = new Polygon(new Vector(100, 100), [
+        new Vector(0, 0),
+        new Vector(200, 0),
+        new Vector(100, 200),
+        new Vector(0, 200),
+      ]);
 
-    const c = polygon.getCentroid();
-
-    chai.expect(c.x).to.equal(20);
-    chai.expect(c.y).to.equal(20);
+      chai.expect(polygon.pointsGeneric).to.deep.equal([0, 0, 200, 0, 100, 200, 0, 200]);
+    });
   });
 
-  it("should calculate the correct value for a triangle", () => {
-    const polygon = new Polygon(
-      new Vector(0, 0), [
-      new Vector(0, 0),
-      new Vector(100, 0),
-      new Vector(50, 99)
-    ]);
+  describe("Centroids", () => {
+    it("should calculate the correct value for a square", () => {
+      const polygon = new Polygon(
+        new Vector(0, 0), [
+        new Vector(0, 0),
+        new Vector(40, 0),
+        new Vector(40, 40),
+        new Vector(0, 40)
+      ]);
 
-    const c = polygon.getCentroid();
+      const c = polygon.getCentroid();
 
-    chai.expect(c.x).to.equal(50);
-    chai.expect(c.y).to.equal(33);
+      chai.expect(c.x).to.equal(20);
+      chai.expect(c.y).to.equal(20);
+    });
+
+    it("should calculate the correct value for a triangle", () => {
+      const polygon = new Polygon(
+        new Vector(0, 0), [
+        new Vector(0, 0),
+        new Vector(100, 0),
+        new Vector(50, 99)
+      ]);
+
+      const c = polygon.getCentroid();
+
+      chai.expect(c.x).to.equal(50);
+      chai.expect(c.y).to.equal(33);
+    });
   });
 });
 

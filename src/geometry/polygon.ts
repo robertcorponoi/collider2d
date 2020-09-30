@@ -30,6 +30,15 @@ export default class Polygon {
   private _points: Array<Vector> = [];
 
   /**
+   * An Array of the points of this polygon as numbers instead of Vectors.
+   * 
+   * @private
+   * 
+   * @property {Array<number>}
+   */
+  private _pointsGeneric: Array<number> = []
+
+  /**
    * The angle of this polygon.
    * 
    * @private
@@ -130,6 +139,13 @@ export default class Polygon {
   get points(): Array<Vector> { return this._points; }
 
   /**
+   * Returns the points of this polygon as numbers instead of Vectors.
+   * 
+   * @returns {Array<number>}
+   */
+  get pointsGeneric(): Array<number> { return this._pointsGeneric; }
+
+  /**
    * Returns the calculated points of this polygon.
    * 
    * @returns {Array<Vector>}
@@ -191,6 +207,9 @@ export default class Polygon {
         // Remove consecutive duplicate points
         const p1: Vector = points[i];
         const p2: Vector = i < points.length - 1 ? points[i + 1] : points[0];
+
+        // Push the points to the generic points Array.
+        this._pointsGeneric.push(points[i].x, points[i].y);
 
         if (p1 !== p2 && p1.x === p2.x && p1.y === p2.y) {
           points.splice(i, 1);

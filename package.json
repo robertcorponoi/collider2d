@@ -1,6 +1,6 @@
 {
   "name": "collider2d",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A 2D collision checker for modern JavaScript games.",
   "main": "build/index.js",
   "module": "collider2d.js",

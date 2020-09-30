@@ -387,6 +387,14 @@ var Polygon = /*#__PURE__*/function () {
    */
 
   /**
+   * An Array of the points of this polygon as numbers instead of Vectors.
+   * 
+   * @private
+   * 
+   * @property {Array<number>}
+   */
+
+  /**
    * The angle of this polygon.
    * 
    * @private
@@ -443,6 +451,8 @@ var Polygon = /*#__PURE__*/function () {
 
     _defineProperty(this, "_points", []);
 
+    _defineProperty(this, "_pointsGeneric", []);
+
     _defineProperty(this, "_angle", 0);
 
     _defineProperty(this, "_offset", new Vector());
@@ -490,7 +500,9 @@ var Polygon = /*#__PURE__*/function () {
         for (i = 0; i < points.length; i++) {
           // Remove consecutive duplicate points
           var p1 = points[i];
-          var p2 = i < points.length - 1 ? points[i + 1] : points[0];
+          var p2 = i < points.length - 1 ? points[i + 1] : points[0]; // Push the points to the generic points Array.
+
+          this._pointsGeneric.push(points[i].x, points[i].y);
 
           if (p1 !== p2 && p1.x === p2.x && p1.y === p2.y) {
             points.splice(i, 1);
@@ -744,6 +756,17 @@ var Polygon = /*#__PURE__*/function () {
     key: "points",
     get: function get() {
       return this._points;
+    }
+    /**
+     * Returns the points of this polygon as numbers instead of Vectors.
+     * 
+     * @returns {Array<number>}
+     */
+
+  }, {
+    key: "pointsGeneric",
+    get: function get() {
+      return this._pointsGeneric;
     }
     /**
      * Returns the calculated points of this polygon.

@@ -25,6 +25,14 @@ export default class Polygon {
      */
     private _points;
     /**
+     * An Array of the points of this polygon as numbers instead of Vectors.
+     *
+     * @private
+     *
+     * @property {Array<number>}
+     */
+    private _pointsGeneric;
+    /**
      * The angle of this polygon.
      *
      * @private
@@ -91,6 +99,12 @@ export default class Polygon {
      * @returns {Array<Vector>}
      */
     get points(): Array<Vector>;
+    /**
+     * Returns the points of this polygon as numbers instead of Vectors.
+     *
+     * @returns {Array<number>}
+     */
+    get pointsGeneric(): Array<number>;
     /**
      * Returns the calculated points of this polygon.
      *

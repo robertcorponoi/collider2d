@@ -1,3 +1,9 @@
+## 1.1.0 / 2020-09-30
+- [FEATURE] Added `genericPoints` Array to Polygon which is an Array of all of the points in the Polygon as just numbers instead of Vectors. This is useful for creating triangles from Polygons.
+
+## 1.0.1 / 2020-09-29
+- [HOTFIX] Fixed the location of the typings.
+
 ## 1.0.0 / 2020-09-28
 - [FEATURE] Made the Vector, Box, Circle, and Polygon classes into their own individual exports instead of having to be created through the Collider2d class.
 - [FEATURE] Removed the reference to Box in Polygon to clear up a circular dependency.
