@@ -77,8 +77,39 @@ var Vector = /*#__PURE__*/function () {
 
 
   _createClass(Vector, [{
-    key: "copy",
+    key: "x",
+    get: function get() {
+      return this._x;
+    }
+    /**
+     * Returns the y value of this vector.
+     * 
+     * @returns {number}
+     */
+    ,
+    set:
+    /**
+     * Sets a new x value for this vector.
+     * 
+     * @param {number} x The new x value for this vector.
+     */
+    function set(x) {
+      this._x = x;
+    }
+    /**
+     * Sets a new y value for this vector.
+     * 
+     * @param {number} y The new y value for this vector.
+     */
 
+  }, {
+    key: "y",
+    get: function get() {
+      return this._y;
+    },
+    set: function set(y) {
+      this._y = y;
+    }
     /**
      * Copy the values of another Vector into this one.
      * 
@@ -86,6 +117,9 @@ var Vector = /*#__PURE__*/function () {
      * 
      * @returns {Vector} Returns this for chaining.
      */
+
+  }, {
+    key: "copy",
     value: function copy(other) {
       this._x = other.x;
       this._y = other.y;
@@ -321,40 +355,6 @@ var Vector = /*#__PURE__*/function () {
     value: function len() {
       return Math.sqrt(this.len2());
     }
-  }, {
-    key: "x",
-    get: function get() {
-      return this._x;
-    }
-    /**
-     * Returns the y value of this vector.
-     * 
-     * @returns {number}
-     */
-    ,
-
-    /**
-     * Sets a new x value for this vector.
-     * 
-     * @param {number} x The new x value for this vector.
-     */
-    set: function set(x) {
-      this._x = x;
-    }
-    /**
-     * Sets a new y value for this vector.
-     * 
-     * @param {number} y The new y value for this vector.
-     */
-
-  }, {
-    key: "y",
-    get: function get() {
-      return this._y;
-    },
-    set: function set(y) {
-      this._y = y;
-    }
   }]);
 
   return Vector;
@@ -474,8 +474,109 @@ var Polygon = /*#__PURE__*/function () {
 
 
   _createClass(Polygon, [{
-    key: "setPoints",
+    key: "position",
+    get: function get() {
+      return this._position;
+    }
+    /**
+     * **Note:** Not sure if this will be kept or not but for now it's disabled.
+     * 
+     * Sets a new position for this polygon and recalculates the points.
+     * 
+     * @param {Vector} position A Vector representing the new position of this polygon.
+     */
+    // set position(position: Vector) {
+    //   const diffX: number = -(this._position.x - position.x);
+    //   const diffY: number = -(this._position.y - position.y);
+    //   const diffPoint: Vector = new Vector(diffX, diffY);
+    //   const points: Array<Vector> = [];
+    //   this._points.map((point: Vector) => {
+    //     const tempX: number = point.x;
+    //     const tempY: number = point.y;
+    //     const tempPoint: Vector = new Vector(tempX, tempY);
+    //     const calculatedPoint: Vector = tempPoint.add(diffPoint);
+    //     points.push(calculatedPoint);
+    //   });
+    //   this.setPoints(points, true);
+    // }
 
+    /**
+     * Returns the points of this polygon.
+     * 
+     * @returns {Array<Vector>}
+     */
+
+  }, {
+    key: "points",
+    get: function get() {
+      return this._points;
+    }
+    /**
+     * Returns the points of this polygon as numbers instead of Vectors.
+     * 
+     * @returns {Array<number>}
+     */
+
+  }, {
+    key: "pointsGeneric",
+    get: function get() {
+      return this._pointsGeneric;
+    }
+    /**
+     * Returns the calculated points of this polygon.
+     * 
+     * @returns {Array<Vector>}
+     */
+
+  }, {
+    key: "calcPoints",
+    get: function get() {
+      return this._calcPoints;
+    }
+    /**
+     * Returns the offset of this polygon.
+     * 
+     * @returns {Vector}
+     */
+
+  }, {
+    key: "offset",
+    get: function get() {
+      return this._offset;
+    }
+    /**
+     * Returns the angle of this polygon.
+     * 
+     * @returns {number}
+     */
+
+  }, {
+    key: "angle",
+    get: function get() {
+      return this._angle;
+    }
+    /**
+     * Returns the edges of this polygon.
+     * 
+     * @returns {Array<Vector>}
+     */
+
+  }, {
+    key: "edges",
+    get: function get() {
+      return this._edges;
+    }
+    /**
+     * Returns the normals of this polygon.
+     * 
+     * @returns {Array<Vector>}
+     */
+
+  }, {
+    key: "normals",
+    get: function get() {
+      return this._normals;
+    }
     /**
      * Set the points of the polygon. Any consecutive duplicate points will be combined.
      * 
@@ -487,6 +588,9 @@ var Polygon = /*#__PURE__*/function () {
      *    * 
      * @returns {Polygon} Returns this for chaining.
      */
+
+  }, {
+    key: "setPoints",
     value: function setPoints(points) {
       // Only re-allocate if this is a new polygon or the number of points has changed.
       var lengthChanged = !this.points || this.points.length !== points.length;
@@ -719,110 +823,6 @@ var Polygon = /*#__PURE__*/function () {
       cy = cy / ar;
       return new Vector(cx, cy);
     }
-  }, {
-    key: "position",
-    get: function get() {
-      return this._position;
-    }
-    /**
-     * **Note:** Not sure if this will be kept or not but for now it's disabled.
-     * 
-     * Sets a new position for this polygon and recalculates the points.
-     * 
-     * @param {Vector} position A Vector representing the new position of this polygon.
-     */
-    // set position(position: Vector) {
-    //   const diffX: number = -(this._position.x - position.x);
-    //   const diffY: number = -(this._position.y - position.y);
-    //   const diffPoint: Vector = new Vector(diffX, diffY);
-    //   const points: Array<Vector> = [];
-    //   this._points.map((point: Vector) => {
-    //     const tempX: number = point.x;
-    //     const tempY: number = point.y;
-    //     const tempPoint: Vector = new Vector(tempX, tempY);
-    //     const calculatedPoint: Vector = tempPoint.add(diffPoint);
-    //     points.push(calculatedPoint);
-    //   });
-    //   this.setPoints(points, true);
-    // }
-
-    /**
-     * Returns the points of this polygon.
-     * 
-     * @returns {Array<Vector>}
-     */
-
-  }, {
-    key: "points",
-    get: function get() {
-      return this._points;
-    }
-    /**
-     * Returns the points of this polygon as numbers instead of Vectors.
-     * 
-     * @returns {Array<number>}
-     */
-
-  }, {
-    key: "pointsGeneric",
-    get: function get() {
-      return this._pointsGeneric;
-    }
-    /**
-     * Returns the calculated points of this polygon.
-     * 
-     * @returns {Array<Vector>}
-     */
-
-  }, {
-    key: "calcPoints",
-    get: function get() {
-      return this._calcPoints;
-    }
-    /**
-     * Returns the offset of this polygon.
-     * 
-     * @returns {Vector}
-     */
-
-  }, {
-    key: "offset",
-    get: function get() {
-      return this._offset;
-    }
-    /**
-     * Returns the angle of this polygon.
-     * 
-     * @returns {number}
-     */
-
-  }, {
-    key: "angle",
-    get: function get() {
-      return this._angle;
-    }
-    /**
-     * Returns the edges of this polygon.
-     * 
-     * @returns {Array<Vector>}
-     */
-
-  }, {
-    key: "edges",
-    get: function get() {
-      return this._edges;
-    }
-    /**
-     * Returns the normals of this polygon.
-     * 
-     * @returns {Array<Vector>}
-     */
-
-  }, {
-    key: "normals",
-    get: function get() {
-      return this._normals;
-    }
   }]);
 
   return Polygon;
@@ -959,47 +959,6 @@ var Circle = /*#__PURE__*/function () {
 
 
   _createClass(Circle, [{
-    key: "translate",
-
-    /**
-     * Translate the center of the cirlc.e
-     * 
-     * @param {Vector} position A Vector representing the new center of this circle.
-     */
-    value: function translate(x, y) {
-      this._position.x += x;
-      this._position.y += y;
-    }
-    /**
-     * Compute the axis-aligned bounding box (AABB) of this Circle.
-     * 
-     * Note: Returns a new `Polygon` each time this is called.
-     * 
-     * @returns {Polygon} Returns the AABB of this circle.
-     */
-
-  }, {
-    key: "getAABB",
-    value: function getAABB() {
-      var corner = this._position.clone().add(this._offset).sub(new Vector(this._radius, this._radius));
-
-      return new Box(corner, this._radius * 2, this._radius * 2).toPolygon();
-    }
-    /**
-     * Set the current offset to apply to the radius.
-     * 
-     * @param {Vector} offset The new offset Vector.
-     * 
-     * @returns {Circle} Returns this for chaining.
-     */
-
-  }, {
-    key: "setOffset",
-    value: function setOffset(offset) {
-      this._offset = offset;
-      return this;
-    }
-  }, {
     key: "position",
     get: function get() {
       return this._position;
@@ -1034,6 +993,47 @@ var Circle = /*#__PURE__*/function () {
     ,
     set: function set(offset) {
       this._offset = offset;
+    }
+    /**
+     * Translate the center of the cirlc.e
+     * 
+     * @param {Vector} position A Vector representing the new center of this circle.
+     */
+
+  }, {
+    key: "translate",
+    value: function translate(x, y) {
+      this._position.x += x;
+      this._position.y += y;
+    }
+    /**
+     * Compute the axis-aligned bounding box (AABB) of this Circle.
+     * 
+     * Note: Returns a new `Polygon` each time this is called.
+     * 
+     * @returns {Polygon} Returns the AABB of this circle.
+     */
+
+  }, {
+    key: "getAABB",
+    value: function getAABB() {
+      var corner = this._position.clone().add(this._offset).sub(new Vector(this._radius, this._radius));
+
+      return new Box(corner, this._radius * 2, this._radius * 2).toPolygon();
+    }
+    /**
+     * Set the current offset to apply to the radius.
+     * 
+     * @param {Vector} offset The new offset Vector.
+     * 
+     * @returns {Circle} Returns this for chaining.
+     */
+
+  }, {
+    key: "setOffset",
+    value: function setOffset(offset) {
+      this._offset = offset;
+      return this;
     }
   }]);
 

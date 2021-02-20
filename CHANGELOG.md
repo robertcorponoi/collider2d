@@ -1,3 +1,6 @@
+## 1.1.1 / 2021-02-20
+- [MISC] Updated dependencies to their latest versions.
+
 ## 1.1.0 / 2020-09-30
 - [FEATURE] Added `genericPoints` Array to Polygon which is an Array of all of the points in the Polygon as just numbers instead of Vectors. This is useful for creating triangles from Polygons.
 
