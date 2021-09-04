@@ -20,7 +20,7 @@
   - [Vector](#vector)
   - [Circle](#circle)
   - [Box](#box)
-  - [BoxOrigin](#BoxOrigin)
+  	- [BoxOrigin](#BoxOrigin)
   - [Polygon](#polygon)
 - [Collisions](#collisions)
   - [pointInCircle](#pointInCircle)
@@ -157,7 +157,7 @@ const box = new Box(new Vector(5, 10), 100, 250,new Vector(50,0));
 
 To see the full list of properties and methods for boxes, check out the [box documentation](docs/box.md).
 
-## **BoxOrigin**
+**BoxOrigin**
 
 a list of common origin points (center,bottomLeft,bottomRight,topRigth,topLeft) for the box collider
 
