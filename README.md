@@ -20,6 +20,7 @@
   - [Vector](#vector)
   - [Circle](#circle)
   - [Box](#box)
+  	- [BoxOrigin](#BoxOrigin)
   - [Polygon](#polygon)
 - [Collisions](#collisions)
   - [pointInCircle](#pointInCircle)
@@ -62,7 +63,7 @@ and in a Node environment, you can imply require the module:
 **node**
 
 ```js
-const { Vector, Box, Circle, Polygon, Collider2d } = require('collider2d');
+const { Vector, Box, BoxOrigin, Circle, Polygon, Collider2d } = require('collider2d');
 ```
 
 The `Vector`, `Box`, `Circle`, and `Polygon` classes are used to create the shapes to test and then the `Collider2d` class is used to test collisions using the created shapes. Just like with the geometry classes, you'll need to create a new instance of the class to use the collision tests. In the examples below you'll see:
@@ -146,14 +147,25 @@ A box represents an axis-aligned bounding box with a width and a height.
 | position 	| Vector        	| A vector representing the position of this box.                                              	| vector(0, 0) 	|
 | width   	| number        	| The width of this box.                                                                      	| 0            	|
 | height   	| number        	| The height of this box.                                                                      	| 0            	|
+| origin   	| Vector,BoxOrigin  |  The origin point of this box.                                                                      	| vector(0, 0) |
 
 **example:**
 
 ```js
-const box = new Box(new Vector(5, 10), 100, 250);
+const box = new Box(new Vector(5, 10), 100, 250,new Vector(50,0));
 ```
 
 To see the full list of properties and methods for boxes, check out the [box documentation](docs/box.md).
+
+### **BoxOrigin**
+
+a list of common origin points (center,bottomLeft,bottomRight,topRigth,topLeft) for the box collider
+
+**example:**
+
+```js
+const box = new Box(new Vector(5, 10), 100, 250,BoxOrigin.center);
+```
 
 ## **Collisions**
 
