@@ -829,8 +829,21 @@ var Polygon = /*#__PURE__*/function () {
 }();
 
 /**
+ * a enum for quick assignment of common origins
+ */
+
+var BoxOrigin;
+/**
  * A box represents an axis-aligned box with a width and height.
  */
+
+(function (BoxOrigin) {
+  BoxOrigin[BoxOrigin["center"] = 0] = "center";
+  BoxOrigin[BoxOrigin["bottomLeft"] = 1] = "bottomLeft";
+  BoxOrigin[BoxOrigin["bottomRight"] = 2] = "bottomRight";
+  BoxOrigin[BoxOrigin["topRigth"] = 3] = "topRigth";
+  BoxOrigin[BoxOrigin["topLeft"] = 4] = "topLeft";
+})(BoxOrigin || (BoxOrigin = {}));
 
 var Box = /*#__PURE__*/function () {
   /**
@@ -858,6 +871,14 @@ var Box = /*#__PURE__*/function () {
    */
 
   /**
+   * The origin point of this box.
+   * 
+   * @private
+   * 
+   * @property {Vector}
+   */
+
+  /**
    * Creates a new Box, with the specified position, width, and height.
    * 
    * If no position is given, the position will be `(0, 0)`. If no width or height are given, they will be set to `0`.
@@ -865,11 +886,13 @@ var Box = /*#__PURE__*/function () {
    * @param {Vector} [position=new Vector()] The position of this box as a Vector.
    * @param {number} [width=0] The width of this box.
    * @param {number} [height=0] The height of this box.
+   * @param {Vector | BoxOrigin} [origin=BoxOrigin.bottomLeft] the custom point of origin or common point of origin.
    */
   function Box() {
     var position = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new Vector();
     var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
     var height = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    var origin = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : BoxOrigin.bottomLeft;
 
     _classCallCheck(this, Box);
 
@@ -879,21 +902,50 @@ var Box = /*#__PURE__*/function () {
 
     _defineProperty(this, "_height", 0);
 
+    _defineProperty(this, "_origin", new Vector());
+
     this._position = position;
     this._width = width;
     this._height = height;
+    this.setOrigin(origin);
   }
   /**
-   * Returns a Polygon whose edges are the same as this Box.
+   * set the origin point of this Box.
    * 
-   * @returns {Polygon} A new Polygon that represents this Box.
+   * @param {Vector | BoxOrigin} newOrigin the custom point of origin or common point of origin.
    */
 
 
   _createClass(Box, [{
+    key: "setOrigin",
+    value: function setOrigin(newOrigin) {
+      this._origin = newOrigin instanceof Vector ? newOrigin : this._getCommonsOrigin(newOrigin);
+    }
+    /**
+     * Returns a Polygon whose edges are the same as this Box.
+     * 
+     * @returns {Polygon} A new Polygon that represents this Box.
+     */
+
+  }, {
     key: "toPolygon",
     value: function toPolygon() {
-      return new Polygon(new Vector(this._position.x, this._position.y), [new Vector(), new Vector(this._width, 0), new Vector(this._width, this._height), new Vector(0, this._height)]);
+      return new Polygon(new Vector(this._position.x, this._position.y), [new Vector().sub(this._origin), new Vector(this._width, 0).sub(this._origin), new Vector(this._width, this._height).sub(this._origin), new Vector(0, this._height).sub(this._origin)]);
+    }
+    /**
+     * Return the common origin point
+     * 
+     * @param {BoxOrigin} origin Common origin point type
+     * @returns {Vector} Common origin point
+     */
+
+  }, {
+    key: "_getCommonsOrigin",
+    value: function _getCommonsOrigin(origin) {
+      var _Origins;
+
+      var Origins = (_Origins = {}, _defineProperty(_Origins, BoxOrigin.center, new Vector(this._width / 2, this._height / 2)), _defineProperty(_Origins, BoxOrigin.bottomLeft, new Vector()), _defineProperty(_Origins, BoxOrigin.bottomRight, new Vector(this._width, 0)), _defineProperty(_Origins, BoxOrigin.topRigth, new Vector(this._width, this._height)), _defineProperty(_Origins, BoxOrigin.topLeft, new Vector(0, this._height)), _Origins);
+      return Origins[origin];
     }
   }]);
 
@@ -1699,4 +1751,4 @@ var Collider2D = /*#__PURE__*/function () {
   return Collider2D;
 }();
 
-export { Box, Circle, Collider2D as Collider2d, Polygon, Vector };
+export { Box, BoxOrigin, Circle, Collider2D as Collider2d, Polygon, Vector };

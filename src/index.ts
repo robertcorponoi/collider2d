@@ -7,6 +7,8 @@ import Polygon from './geometry/polygon';
 
 import Collider2d from './collider2d';
 
+export {BoxOrigin} from './geometry/box';
+
 export {
   Box,
   Circle,
